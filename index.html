@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FIGURE ARCHIVE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#"><span class="brand-mark">F</span><span>FIGURE<br />ARCHIVE</span></a>
+        <nav>
+          <button class="nav-item active" data-view="collection"><span>◫</span>コレクション</button>
+          <button class="nav-item" data-view="family-home"><span>⌂</span>実家保管</button>
+          <button class="nav-item" data-view="sell-candidates"><span>↗</span>売却候補</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="storage"><span>COLLECTION SIZE</span><strong id="sideCount">0 <small>ITEMS</small></strong></div>
+          <button id="themeBtn" class="theme-btn">◐　テーマを切り替え</button>
+        </div>
+      </aside>
+
+      <main>
+        <header>
+          <div>
+            <p class="eyebrow" id="headerEyebrow">MY COLLECTION</p>
+            <h1 id="pageTitle">コレクション</h1>
+          </div>
+          <button class="primary-btn" id="openModalBtn"><span>＋</span> フィギュアを登録</button>
+        </header>
+
+        <section class="toolbar" id="collectionTools">
+          <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="作品名・キャラクターで検索" /></label>
+          <select id="seriesFilter" aria-label="作品で絞り込み"><option value="">すべての作品</option></select>
+        </section>
+
+        <section class="collection-summary" aria-label="コレクションの内訳">
+          <div class="summary-group"><div><span>COLLECTION</span><strong id="allCount">0</strong><small>登録数</small></div><div><span>SELL CANDIDATES</span><strong id="sellCandidateCount">0</strong><small>売却候補</small></div><div><span>FAMILY HOME</span><strong id="familyHomeCount">0</strong><small>実家保管</small></div></div>
+          <div><span>ACQUISITION TOTAL</span><strong id="acquisitionTotal">¥0</strong><small>入手価格合計</small></div>
+        </section>
+
+        <section id="collectionView">
+          <div class="collection-meta"><span id="resultCount">0 ITEMS</span><button id="clearFilters" class="text-btn">フィルターをクリア</button></div>
+          <div class="table-wrap"><table class="figure-table"><thead><tr><th>作品</th><th>キャラクター</th><th>名称</th><th><button class="column-sort" data-sort-field="price" type="button">入手価格<span></span></button></th><th>売却候補</th><th>実家</th><th aria-label="操作"></th></tr></thead><tbody id="figureGrid"></tbody></table></div>
+        </section>
+
+      </main>
+    </div>
+
+    <dialog id="figureModal">
+      <form id="figureForm">
+        <div class="modal-head"><div><p class="eyebrow">NEW FIGURE</p><h2>フィギュアを登録</h2></div><button type="button" class="close-btn" id="closeModalBtn">×</button></div>
+        <div class="form-grid">
+          <label class="full">キャラクター<input required name="name" placeholder="例：悟空" /></label>
+          <label class="full">作品 <span class="optional">任意</span><input name="series" placeholder="例：NARUTO" /></label>
+          <label class="full">名称 <span class="optional">任意</span><textarea name="note" placeholder="例：SMSP、一番くじ メモリーズ"></textarea></label>
+          <label>入手価格<input name="price" type="number" min="0" placeholder="例：10000" /></label>
+        </div>
+        <button class="primary-btn submit-btn" type="submit">登録する</button>
+      </form>
+    </dialog>
+
+    <template id="cardTemplate">
+      <tr>
+        <td class="series"></td><td class="figure-name"></td><td class="note"></td><td class="price"></td><td class="sell-candidate"><input class="sell-candidate-toggle" type="checkbox" aria-label="売却候補フラグを切り替え" /></td><td class="family-home"><input class="family-home-toggle" type="checkbox" aria-label="実家保管フラグを切り替え" /></td>
+        <td class="row-actions"><button class="delete-btn" title="削除" aria-label="削除">×</button></td>
+      </tr>
+    </template>
+    <script src="app.js"></script>
+  </body>
+</html>
